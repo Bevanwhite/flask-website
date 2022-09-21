@@ -23,6 +23,22 @@ then use `flask run`
 ### how to on the flask debug using the script it self
 ```
 if '__name__' == '__main__':
-    Flask.app(debug=True)
+    app.run(debug=True)
+```
+run this command terminal <br>
+`python origami.py`
 
+`origami variable` - is list of dictionaries
+
+how to put the jinja2 code into html
+
+on the base.html
+`{% block content %} {% endblock content %}`
+
+on other `<html>` files that you want to show your code,
+```
+{% extends "layout.html"%}
+{% block content %}
+    <!-- your code goes here -->
+{% endblock content %}
 ```
