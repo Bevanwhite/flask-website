@@ -1,8 +1,105 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after{
+    box-sizing: border-box;
+}
+
 body{
     margin: 0;
+    background-color: #0F3460;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body * + *{
+    margin-top: 1.5em;
 }
 
 .container{
-    width:60%;
+    max-width:1080px;
     margin: 0 auto;
+}
+nav{
+    background-color: #16213E;
+    padding-top: 1px;
+}
+
+.site-nav{
+    margin-top: 0;
+    display:flex;
+    padding: .5em;
+    list-style-type:none;
+    border-radius: .2em;
+}
+
+.site-nav > li{
+    margin-top:0;
+}
+.site-nav > strong{
+    display: block;
+    margin-right: 20px;
+    padding: .5em 0;
+    color: white;
+    font-size: x-large;
+}
+
+.site-nav > li > a {
+    display: block;
+    margin-top: 10px;
+    padding: .5em 1em;
+    align-items: baseline;
+    background-color: #E94560;
+    color:white;
+    text-decoration: none;
+}
+
+.site-nav > li + li{
+    margin-left:1.5em;
+}
+
+.site-nav > .nav-right{
+    margin-left:auto;
+    padding: .5em 0;
+    margin-top: 10px;
+}
+
+.site-nav > .nav-right > a{
+    display: inline;
+}
+.nav-right > a + a {
+    margin-left:1.5em;
+}
+
+.leftcolumn{
+    float:left;
+    width:75%;
+}
+
+.rightcolumn{
+    float:right;
+    width:25%;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.fakeimg {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+  }
+
+.card{
+    background-color: #afa6a6;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
