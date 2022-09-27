@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="leftcolumn">
+    <div class="card top-card">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>Log in</legend>
+                <div class="form-group">
+                    {{form.email.label}}
+                    {% if form.email.errors%}
+                        {{ form.email(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class="form-control")}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.password.label}}
+                    {% if form.password.errors%}
+                        {{ form.password(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.password(class="form-control")}}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{form.remember(class="form-check-input")}}
+                    {{form.remember.label(class="form-check-label")}}
+                </div>
+            </fieldset>
+            <div class="form_group">
+                {{form.submit(class="registerbtn")}}
+                <p>
+                    <a href="#">Forgot Password?</a>
+                </p>
+            </div>
+        </form>
+        <div class="">
+            <p>Need An Account?   <a class="login-btn" href="{{url_for('register')}}">Sign Up</a></p>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

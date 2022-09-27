@@ -2,13 +2,13 @@
     <div class="container">
         <ul class="site-nav">
             <strong>Origami</strong>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('about')}}">about</a></li>
             <li class="nav-right">
-                <a href="#">About</a>
+                <a href="{{url_for('register')}}">Register</a>
             </li>
             <li>
-                <a href="#">Support</a>
+                <a href="{{url_for('login')}}">Login</a>
             </li>
         </ul>
     </div>
