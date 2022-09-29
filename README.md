@@ -42,3 +42,17 @@ on other `<html>` files that you want to show your code,
     <!-- your code goes here -->
 {% endblock content %}
 ```
+
+coming to css files
+
+there is to ways that you can add the css file. first of all you need to create a folder called<br> static and then you can access it from there.
+
+so what i have done is i have make it like `static\css' <br>
+inside that you can find the style.css. 
+
+then on templates goto the layout.html <br> 
+add these codes
+first one
+`<link rel="stylesheet" href="static/css/style.css" />`
+below code is python way of adding css
+`<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">`
