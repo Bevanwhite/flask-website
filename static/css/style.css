@@ -76,6 +76,7 @@ nav{
 .leftcolumn{
     float:left;
     width:75%;
+    margin-top: 0;
 }
 
 .rightcolumn{
