@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect
+from origami import app
 from origami.forms import RegistrationForm, LoginForm
-from origmai.models import User, Post
+from origami.models import User, Post
 
 
 origami = [
