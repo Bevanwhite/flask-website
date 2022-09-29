@@ -51,8 +51,8 @@ so what i have done is i have make it like `static\css' <br>
 inside that you can find the style.css. 
 
 then on templates goto the layout.html <br> 
-add these codes
-first one
-`<link rel="stylesheet" href="static/css/style.css" />`
-below code is python way of adding css
-`<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">`
+add these codes<br>
+first one<br>
+`<link rel="stylesheet" href="static/css/style.css" />`<br>
+below code is python way of adding css<br>
+`<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">`<br>
