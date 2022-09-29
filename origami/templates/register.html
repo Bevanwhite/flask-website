@@ -11,7 +11,7 @@
                     {% if form.username.errors %}
                         {{ form.username(class="is-invalid")}}
                         <div class="invaild-feedback">
-                            {% for error in form.user.errors %}
+                            {% for error in form.username.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
