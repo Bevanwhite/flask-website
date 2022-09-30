@@ -1,4 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{current_user.username}}</h1>
+<div class="container">
+    <div class="row">
+        <div class="leftcolumn">
+            <div class="card">
+                <div class="imgfile">
+                    <img src="{{url_for('static',filename='images/N9265948.jpg')}}" class="profile-pic" alt="">
+                </div>
+                <div class="text-file">
+                    <h1>{{current_user.username}}</h1>
+                    <p>{{current_user.email}}</p>
+                </div>
+            </div>
+        </div>
+    <h1></h1>
 {% endblock content %}
