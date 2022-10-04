@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from origami import app, db, bcrypt
-from origami.forms import RegistrationForm, LoginForm
+from origami.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from origami.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -64,7 +64,17 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route("/account")
+@app.route("/account", methods=['GET','POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated!', 'success')
+        return redirect('account')
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('account.html', title='Account',form=form)

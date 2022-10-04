@@ -184,13 +184,13 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .imgfile{
-    float: left;
-    width:10%;
+    width:100px;
+    display: inline-block;
 }
 .text-file{
-    float: right;
-    width: 80%;
+    display: inline-block;
     margin: 0;
+    margin-left: 10px;
 }
 
 .text-file h1, .text-file p{
