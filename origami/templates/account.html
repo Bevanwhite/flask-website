@@ -2,12 +2,12 @@
 {% block content %}
 <div class="leftcolumn">
     <div class="card">
-        <img src="{{url_for('static',filename='images/N9265948.jpg')}}" class="imgfile profile-pic" alt="">
+        <img src="{{url_for('static',filename='profile_pics/'+ current_user.image_file)}}" class="profile-pic" alt="users profile pics">
         <div class="text-file">
             <h1>{{current_user.username}}</h1>
             <p>{{current_user.email}}</p>
         </div>
-        <form method="POST" action="" >
+        <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset>
                 <legend>Update Your Account</legend>
@@ -35,6 +35,19 @@
                         </div>
                     {% else %}
                         {{form.email(class="form-control")}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.picture.label(class="form-control-label")}}
+                    {% if form.picture.errors%}
+                        {{ form.picture(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.picture.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.picture(class="form-control")}}
                     {% endif %}
                 </div>
             </fieldset>

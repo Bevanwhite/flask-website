@@ -180,13 +180,8 @@ input[type=text]:focus, input[type=password]:focus {
     display: inline-block;
     vertical-align:top; 
     border-radius: 50%; 
-    width:100px;
 }
 
-.imgfile{
-    width:100px;
-    display: inline-block;
-}
 .text-file{
     display: inline-block;
     margin: 0;
