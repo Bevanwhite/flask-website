@@ -5,7 +5,8 @@
             <li><a href="{{url_for('home')}}">Home</a></li>
             <li><a href="{{url_for('about')}}">about</a></li>
             {% if current_user.is_authenticated %}
-                <li class="nav-right"><a href="{{url_for('account')}}">Account</a></li>
+                <li class="nav-right"><a href="{{url_for('new_post')}}">New Post</a></li>
+                <li><a href="{{url_for('account')}}">Account</a></li>
                 <li><a href="{{url_for('logout')}}">Logout</a></li>
             {% else %}
                 <li class="nav-right"><a href="{{url_for('register')}}">Register</a></li>

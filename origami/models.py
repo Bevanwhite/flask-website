@@ -26,4 +26,4 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     def __repr__(self):
-        return f"Post('{self.username}','{self.email}','{self.image_file}')"
+        return f"Post('{self.title}','{self.content}','{self.date_posted}')"

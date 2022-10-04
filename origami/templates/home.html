@@ -3,9 +3,12 @@
 <div class="leftcolumn">
     {% for post in posts %}
         <div class="card">
-            <h1>{{ post.title }}</h1>
-            <p>By {{ post.author }} on {{ post.date_posted }}</p>
-            <p>{{ post.content }}</p>
+            <img src="{{url_for('static',filename='profile_pics/'+ current_user.image_file)}}" class="profile-pic image-size" alt="users profile pics">
+            <div class="text-file">
+                <h1>{{ post.title }}</h1>
+                <p>By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                <p>{{ post.content }}</p>
+            </div>
         </div>
     {% endfor %}
 </div>

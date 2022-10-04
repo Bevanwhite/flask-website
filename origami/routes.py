@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from origami import app, db, bcrypt
-from origami.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from origami.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from origami.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -25,6 +25,8 @@ origami = [
 @app.route("/")
 @app.route("/home")
 def home():
+    origami = Post.query.all()
+    print(origami)
     return render_template('home.html', posts=origami)
 
 @app.route("/about")
@@ -98,3 +100,16 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     return render_template('account.html', title='Account',form=form)
+
+
+@app.route("/post/new",methods=['GET','POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,content=form.content.data, user_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='New Post', form=form)

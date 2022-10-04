@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="leftcolumn">
+    <div class="card top-card">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>New Post</legend>
+                <div class="form-group">
+                    {{form.title.label(class="form-control-label")}}
+                    {% if form.title.errors%}
+                        {{ form.title(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.title(class="form-control")}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.content.label(class="form-control-label")}}
+                    {% if form.content.errors%}
+                        {{ form.content(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.content(class="form-control")}}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form_group">
+                {{form.submit(class="registerbtn")}}
+            </div>
+        </form>
+    </div>
+</div>  
+{% endblock content %}
