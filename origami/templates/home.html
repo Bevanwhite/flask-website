@@ -3,9 +3,9 @@
 <div class="leftcolumn">
     {% for post in posts %}
         <div class="card">
-            <img src="{{url_for('static',filename='profile_pics/'+ current_user.image_file)}}" class="profile-pic image-size" alt="users profile pics">
+            <img src="{{url_for('static',filename='profile_pics/'+ post.author.image_file)}}" class="profile-pic image-size" alt="users profile pics">
             <div class="text-file">
-                <h1>{{ post.title }}</h1>
+                <h1><a href="{{url_for('post',post_id = post.id)}}">{{ post.title }}</a></h1>
                 <p>By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
                 <p>{{ post.content }}</p>
             </div>
