@@ -1,4 +1,5 @@
-from origami import db, login_manager
+from origami import db, login_manager, app
+from itsdangerous import TimestampSigner
 from datetime import datetime
 from flask_login import UserMixin
 
@@ -13,6 +14,20 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+
+    def get_reset_token(self):
+        s = TimestampSigner(app.config['SECRET_KEY'])
+        return s.sign({'user_id':self.id})
+    
+    @staticmethod
+    def verify_reset_token(token, expires_sec=1800):
+        s = TimestampSigner(app.config['SECRET_KEY'])
+
+        try:
+            user_id = s.unsign(token, max_age=expires_sec)['user_id'].decode("utf-8")
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
