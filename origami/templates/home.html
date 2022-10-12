@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="leftcolumn">
-    {% for post in posts %}
+    {% for post in posts.items %}
         <div class="card">
             <img src="{{url_for('static',filename='profile_pics/'+ post.author.image_file)}}" class="profile-pic image-size" alt="users profile pics">
             <div class="text-file">
@@ -10,6 +10,17 @@
                 <p>{{ post.content }}</p>
             </div>
         </div>
+    {% endfor %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <div class="pagination">
+            {% if posts.page == page_num %}
+                <a href="{{url_for('home', page=page_num)}}" class="active">{{ page_num }}</a>
+            {% else %}
+                <a href="{{url_for('home', page=page_num)}}">{{ page_num }}</a>
+            {% endif %}
+        </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock content %}

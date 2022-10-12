@@ -7,25 +7,11 @@ from origami.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostFo
 from origami.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-origami = [
-    {
-        'author' : 'Jeffery White',
-        'title': 'Origami Post 1',
-        'content': 'first origmai post of the day',
-        'date_posted': 'April 20, 2018'
-    },
-    {
-        'author' : 'Dulika Foneska',
-        'title': 'Origami Post 2',
-        'content': 'Second origmai post of the day',
-        'date_posted': 'April 21, 2018'
-    }
-]
-
 @app.route("/")
 @app.route("/home")
 def home():
-    origami = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    origami = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
     return render_template('home.html', posts=origami)
 
 @app.route("/about")
