@@ -248,6 +248,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 .pagination{
     display: inline-block;
+    margin-bottom: 50px;
 }
 
 .pagination a{
@@ -269,4 +270,3 @@ input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     border-radius: 5px;
 }
-

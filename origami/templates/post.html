@@ -4,7 +4,7 @@
     <div class="card">
         <img src="{{url_for('static',filename='profile_pics/'+ post.author.image_file)}}" class="profile-pic image-size" alt="users profile pics">
         <div class="text-file">
-            <p>By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+            <p>By <a href="{{url_for('user_posts', username=post.author.username)}}">{{ post.author.username }}</a> on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
             {% if post.author == current_user %}
                 <a class="update" href="{{url_for('update_post', post_id = post.id)}}">Update</a>
                 <a class="update delete" id="myBtn">Delete</a>
