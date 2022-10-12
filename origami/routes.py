@@ -2,10 +2,11 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
-from origami import app, db, bcrypt
+from origami import app, db, bcrypt, mail
 from origami.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestRestForm, ResetPasswordForm
 from origami.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 
 @app.route("/")
 @app.route("/home")
@@ -145,11 +146,25 @@ def user_posts(username):
         .paginate(page=page, per_page=2)
     return render_template('user_posts.html', posts=origami, user=user)
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Password', sender='jeffery1996.jbw@gmail.com', recipients=[user.email])
+    msg.body = f''' To reset your password, vist the following link:
+{url_for('reset_token', token=token, _external=True)}
+If you did not make this request then simply ignore this email and no changes will be done for the email password'
+'''
+    mail.send(msg)
+
 @app.route("/reset_password",methods=['GET','POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RequestRestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instruction to reset your password', 'info')
+        return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 @app.route("/reset_password/<token>",methods=['GET','POST'])
@@ -161,5 +176,11 @@ def reset_token(token):
         flash('That is an invaild or expired token','warning')
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash(f'Your password has been updated and now you can login','success')
+        return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 

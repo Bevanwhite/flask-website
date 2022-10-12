@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="leftcolumn">
+    <div class="card top-card">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>{{ title }}</legend>
+                <div class="form-group">
+                    {{form.email.label(class="form-control-label")}}
+                    {% if form.email.errors%}
+                        {{ form.email(class="is-invalid")}}
+                        <div class="invaild-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class="form-control")}}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form_group">
+                {{form.submit(class="registerbtn")}}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

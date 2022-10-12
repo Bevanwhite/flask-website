@@ -1,5 +1,5 @@
 from origami import db, login_manager, app
-from itsdangerous import TimestampSigner
+from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime
 from flask_login import UserMixin
 
@@ -16,15 +16,16 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref='author', lazy=True)
 
     def get_reset_token(self):
-        s = TimestampSigner(app.config['SECRET_KEY'])
-        return s.sign({'user_id':self.id})
+        s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+        token = s.dumps({'user_id':(self.id)})
+        return token
     
     @staticmethod
     def verify_reset_token(token, expires_sec=1800):
-        s = TimestampSigner(app.config['SECRET_KEY'])
-
+        s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
         try:
-            user_id = s.unsign(token, max_age=expires_sec)['user_id'].decode("utf-8")
+            user_id = s.loads(token, max_age=expires_sec)['user_id']
+            print(user_id)
         except:
             return None
         return User.query.get(user_id)
