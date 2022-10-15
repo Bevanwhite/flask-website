@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'eebb2c58cc974ff7833f182cc71dfd9e'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.debug = False
-app.config['SQLALCHEMY_DATABASE_URI'] = ' postgres://myhltsfhuflsop:5529ecc6b7ce36c71a3b2a4a23668d022c788a2f5c4679b7e2a1b45e476ecc40@ec2-54-147-36-107.compute-1.amazonaws.com:5432/d1jt0bcpn86610'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://myhltsfhuflsop:5529ecc6b7ce36c71a3b2a4a23668d022c788a2f5c4679b7e2a1b45e476ecc40@ec2-54-147-36-107.compute-1.amazonaws.com:5432/d1jt0bcpn86610'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
